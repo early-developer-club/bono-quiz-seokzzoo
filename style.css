@@ -1,0 +1,495 @@
+/* 보노보노 색상 테마 */
+:root {
+  --bono-blue: #87ceeb; /* 하늘색 */
+  --bono-green: #98fb98; /* 연한 녹색 */
+  --bono-yellow: #ffe4b5; /* 연한 노란색 */
+  --bono-brown: #d2b48c; /* 베이지색 */
+  --bono-orange: #ffb366; /* 연한 주황색 */
+  --bono-purple: #dda0dd; /* 연한 보라색 */
+  --bono-pink: #ffb6c1; /* 연한 핑크색 */
+  --text-dark: #2f4f4f; /* 어두운 회색 */
+  --text-light: #ffffff; /* 흰색 */
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--bono-blue) 0%, var(--bono-green) 50%, var(--bono-yellow) 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 화면 전환 */
+.screen {
+  display: none;
+  width: 100%;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 시작 화면 */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.bono-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px var(--shadow);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px var(--shadow);
+  font-weight: bold;
+}
+
+.rules-section {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.rules-section h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: var(--text-dark);
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--bono-pink), var(--bono-purple));
+  border-radius: 15px;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.rule-number {
+  background: var(--text-light);
+  color: var(--text-dark);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.rule-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.start-button {
+  width: 100%;
+  padding: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--bono-orange), var(--bono-yellow));
+  color: var(--text-dark);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px var(--shadow);
+}
+
+.start-button:active {
+  transform: translateY(0);
+}
+
+/* 퀴즈 화면 */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px var(--shadow);
+}
+
+.progress-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.progress-info span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.timer-container {
+  position: relative;
+}
+
+.timer-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bono-pink), var(--bono-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px var(--shadow);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.timer-circle span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.question-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+#question-text {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  text-align: center;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.options-container {
+  display: grid;
+  gap: 15px;
+}
+
+.option-button {
+  padding: 20px;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--bono-green), var(--bono-blue));
+  color: var(--text-dark);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--shadow);
+  text-align: left;
+  font-weight: 500;
+}
+
+.option-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow);
+}
+
+.option-button:active {
+  transform: translateY(0);
+}
+
+.option-button.selected {
+  background: linear-gradient(135deg, var(--bono-orange), var(--bono-yellow));
+  transform: scale(1.02);
+}
+
+.quiz-footer {
+  text-align: center;
+}
+
+.bono-small {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px var(--shadow);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 결과 화면 */
+.result-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 15px 40px var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+#result-image-container {
+  margin-bottom: 30px;
+}
+
+.result-bono-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.result-bono-image.spinning {
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.result-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+}
+
+.result-content p {
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+  color: var(--text-dark);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.score-result {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--bono-pink), var(--bono-purple));
+  padding: 20px;
+  border-radius: 20px;
+  display: inline-block;
+  color: var(--text-light);
+}
+
+.restart-button {
+  padding: 20px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--bono-orange), var(--bono-yellow));
+  color: var(--text-dark);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.restart-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px var(--shadow);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .bono-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .rules-section {
+    padding: 20px;
+  }
+
+  .rules-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .rule-item {
+    padding: 12px;
+  }
+
+  .rule-text {
+    font-size: 1rem;
+  }
+
+  .quiz-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .timer-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .timer-circle span {
+    font-size: 1.3rem;
+  }
+
+  .question-container {
+    padding: 20px;
+  }
+
+  #question-text {
+    font-size: 1.2rem;
+  }
+
+  .option-button {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .result-container {
+    padding: 30px 20px;
+  }
+
+  .result-bono-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .result-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .result-content p {
+    font-size: 1.1rem;
+  }
+
+  .score-result {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .bono-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .rules-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .rule-text {
+    font-size: 0.9rem;
+  }
+
+  #question-text {
+    font-size: 1.1rem;
+  }
+
+  .option-button {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .result-bono-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .result-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .result-content p {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>보노보노 모의고사</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 시작 화면 -->
+      <div id="start-screen" class="screen active">
+        <div class="header">
+          <img src="bono.png" alt="보노보노" class="bono-image" />
+          <h1>보노보노 모의고사</h1>
+        </div>
+
+        <div class="rules-section">
+          <h2>퀴즈 규칙</h2>
+          <div class="rules-list">
+            <div class="rule-item">
+              <span class="rule-number">1</span>
+              <span class="rule-text">퀴즈는 총 10문항입니다.</span>
+            </div>
+            <div class="rule-item">
+              <span class="rule-number">2</span>
+              <span class="rule-text">문항 당 풀이 시간은 10초 입니다.</span>
+            </div>
+            <div class="rule-item">
+              <span class="rule-number">3</span>
+              <span class="rule-text">최선을 다해 만점을 받아봅시다!</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="start-btn" class="start-button">퀴즈 시작하기</button>
+      </div>
+
+      <!-- 퀴즈 화면 -->
+      <div id="quiz-screen" class="screen">
+        <div class="quiz-header">
+          <div class="progress-info">
+            <span id="question-counter">1 / 10</span>
+            <span id="score-display">점수: 0</span>
+          </div>
+          <div class="timer-container">
+            <div class="timer-circle">
+              <span id="timer">10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-container">
+          <h2 id="question-text">질문이 여기에 표시됩니다</h2>
+          <div id="options-container" class="options-container">
+            <!-- 선택지들이 여기에 동적으로 생성됩니다 -->
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <img src="bono.png" alt="보노보노" class="bono-small" />
+        </div>
+      </div>
+
+      <!-- 결과 화면 -->
+      <div id="result-screen" class="screen">
+        <div class="result-container">
+          <div id="result-image-container">
+            <img src="bono.png" alt="보노보노" id="result-bono-image" class="result-bono-image" />
+          </div>
+          <div class="result-content">
+            <h2 id="result-title">결과</h2>
+            <p id="result-message">결과 메시지가 여기에 표시됩니다</p>
+            <div id="score-result" class="score-result">
+              <span id="final-score">0</span>
+              / 10
+            </div>
+            <button id="restart-btn" class="restart-button">다시 도전하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="quiz-data.js"></script>
+    <script src="quiz-logic.js"></script>
+  </body>
+</html>
+
