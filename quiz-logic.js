@@ -4,6 +4,7 @@ class BonoQuiz {
     this.currentQuestions = []
     this.currentQuestionIndex = 0
     this.score = 0
+    this.lives = 3
     this.timer = null
     this.timeLeft = 10
     this.isAnswered = false
@@ -46,6 +47,7 @@ class BonoQuiz {
     this.currentQuestions = getRandomQuestions(10)
     this.currentQuestionIndex = 0
     this.score = 0
+    this.lives = 3
 
     // 화면 전환
     this.showScreen("quiz-screen")
@@ -65,7 +67,7 @@ class BonoQuiz {
 
   updateProgress() {
     this.questionCounter.textContent = `${this.currentQuestionIndex + 1} / 10`
-    this.scoreDisplay.textContent = `점수: ${this.score}`
+    this.scoreDisplay.textContent = `점수: ${this.score} | 기회: ${this.lives}`
   }
 
   showQuestion() {
@@ -144,18 +146,33 @@ class BonoQuiz {
       this.updateProgress() // 점수 즉시 업데이트
     }
 
-    // 오답이거나 시간 초과 시 게임 종료
+    // 모든 버튼 비활성화
+    const allButtons = this.optionsContainer.querySelectorAll(".option-button")
+    allButtons.forEach((button) => {
+      button.disabled = true
+    })
+
+    // 오답인 경우 기회 차감 후 처리
     if (!isCorrect) {
-      setTimeout(() => {
-        this.showResult()
-      }, 2000)
-    } else {
-      // 정답인 경우 다음 문제로
-      setTimeout(() => {
-        this.currentQuestionIndex++
-        this.showQuestion()
-      }, 2000)
+      this.lives = Math.max(0, this.lives - 1)
+      this.updateProgress()
     }
+
+    setTimeout(() => {
+      // 남은 기회가 없으면 결과 화면으로
+      if (this.lives <= 0) {
+        this.showResult()
+        return
+      }
+
+      // 다음 문제로 진행 (마지막 문제를 넘기면 결과 표시)
+      this.currentQuestionIndex++
+      if (this.currentQuestionIndex >= this.currentQuestions.length) {
+        this.showResult()
+      } else {
+        this.showQuestion()
+      }
+    }, 2000)
   }
 
   timeUp() {
@@ -175,9 +192,22 @@ class BonoQuiz {
     buttons[question.answer].style.background = "linear-gradient(135deg, #98FB98, #87CEEB)"
     buttons[question.answer].style.border = "3px solid #32CD32"
 
-    // 시간 초과로 게임 종료
+    // 시간 초과: 기회 차감 후 처리
+    this.lives = Math.max(0, this.lives - 1)
+    this.updateProgress()
+
     setTimeout(() => {
-      this.showResult()
+      if (this.lives <= 0) {
+        this.showResult()
+        return
+      }
+
+      this.currentQuestionIndex++
+      if (this.currentQuestionIndex >= this.currentQuestions.length) {
+        this.showResult()
+      } else {
+        this.showQuestion()
+      }
     }, 2000)
   }
 
